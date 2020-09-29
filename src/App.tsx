@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import HelloWorld from './HelloWorld';
+import PopUpForm from './PopUpForm';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           Learn React
         </a>
       </header>
+      <HelloWorld numEx={9}></HelloWorld>
+      <PopUpForm numEx={9}></PopUpForm>
     </div>
   );
 }
