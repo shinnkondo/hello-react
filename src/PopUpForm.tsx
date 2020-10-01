@@ -1,30 +1,43 @@
 import React, { Component } from "react";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import Modal from 'react-modal'
+import PreEntityForm from './PreEntityForm'
 interface Props {
     numEx: number
 }
+interface States {
+    modalIsOpen: boolean
+}
 
-export default class PopUpForm extends Component<Props> {
+export default class PopUpForm extends Component<Props, States> {
+    constructor(props: Props) {
+        super(props);
+        this.state = {modalIsOpen: false}
+        
+    }
+    setIsOpen(b: boolean) {
+        this.setState({modalIsOpen: b})
+    }
+
+    openModal() {
+        this.setIsOpen(true);
+      }
+    closeModal(){
+        this.setIsOpen(false);
+      }
     render() {
         return (
-            <Formik initialValues={{ email: '', password: '' }}
-            onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  setSubmitting(false);
-                }, 400);}}>
-                {({ isSubmitting }) => (
-                <Form>
-                    <Field type="email" name="email" />
-                    <ErrorMessage name="email" component="div" />
-                    <Field type="password" name="password" />
-                    <ErrorMessage name="password" component="div" />
-                    <button type="submit" disabled={isSubmitting}>
-                        Submit
-                    </button>
-                </Form>
-            )}
-            </Formik>
+            <div>
+            <button onClick={this.openModal.bind(this)}>Open Modal</button>
+            <Modal
+              isOpen={this.state.modalIsOpen}
+              onRequestClose={this.closeModal.bind(this)}
+              contentLabel="Example Modal"
+            >
+                <PreEntityForm></PreEntityForm>
+              <button onClick={this.closeModal.bind(this)}>close</button>
+            </Modal>
+          </div>
         )
     }
 }

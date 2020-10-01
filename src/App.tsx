@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Modal from 'react-modal';
 import HelloWorld from './HelloWorld';
 import PopUpForm from './PopUpForm';
 
